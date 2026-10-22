@@ -94,10 +94,7 @@ export default function Home() {
       food: "The food must be here",
     };
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/createFood",
-        data,
-      );
+      const response = await axios.post("/api/createFood", data);
       console.log(response);
     } catch (err) {
       console.log(err);
