@@ -1,11 +1,95 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-import styles from "@/styles/Home.module.css";
+import styled from "@emotion/styled";
+import axios from "axios";
+
+const StyledForm = styled.form`
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px;
+  margin-top: 30px;
+  border: 3px solid brown;
+  box-shadow: 10px 10px 10px black;
+  border-radius: 20px;
+  & button {
+    padding: 20px;
+    border: 2px solid brown;
+    background-color: #ff6600;
+    border-radius: 20px;
+    margin-top: 20px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+`;
+const Input = styled.div`
+  margin-top: 30px;
+`;
+
+const NamedInput = styled(Input)`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  & input {
+    height: 30px;
+  }
+`;
+
+const RadioBlock = styled(Input)`
+  & .radiGroupt {
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+    gap: 20px;
+    & input {
+      margin-left: 10px;
+    }
+  }
+`;
+
+const CheckboxBlock = styled(Input)`
+  & .items {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 20px;
+    & div {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+  }
+`;
+
+const createHabits = (form) => {
+  const arr = [];
+  if (form.fruts.checked) {
+    arr.push(1);
+  } else if (form.meat.checked) {
+    arr.push(2);
+  } else if (form.shugar.checked) {
+    arr.push(3);
+  }
+  return arr;
+};
 
 export default function Home() {
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+    const form = event.target;
+    const habits = [];
+
+    const data = {
+      email: form.email,
+      gender: form.gender,
+      age: form.age,
+      jobe_status: form.jobe_status,
+      family_income: form.family_income,
+      education_level: form.education_level,
+    };
   };
   return (
     <>
@@ -16,13 +100,175 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <form onSubmit={onSubmit}>
-          <div>
-            <label htmlFor="">Email</label>
-          </div>
+        <StyledForm onSubmit={onSubmit}>
+          <NamedInput>
+            <label htmlFor="email">Email</label>
+            <input type="text" id="email" />
+          </NamedInput>
+          <RadioBlock>
+            <h2>Стать</h2>
+            <div className="radiGroupt">
+              <div>
+                <label htmlFor="male">Чоловіча</label>
+                <input type="radio" name="gender" value={1} />
+              </div>
+              <div>
+                <label htmlFor="male">Жіноча</label>
+                <input type="radio" name="gender" value={2} />
+              </div>
+              <div>
+                <label htmlFor="male">Інша</label>
+                <input type="radio" name="gender" value={3} />
+              </div>
+            </div>
+          </RadioBlock>
+          <NamedInput>
+            <label htmlFor="age">Вік</label>
+            <input type="number" id="age" />
+          </NamedInput>
+          <RadioBlock>
+            <h2>Статус зайнятості</h2>
+            <div className="radiGroupt">
+              <div>
+                <label htmlFor="male">Працевлаштований</label>
+                <input type="radio" name="jobe_status" value={1} />
+              </div>
+              <div>
+                <label htmlFor="male">Безробітний</label>
+                <input type="radio" name="jobe_status" value={2} />
+              </div>
+              <div>
+                <label htmlFor="male">Студент</label>
+                <input type="radio" name="jobe_status" value={3} />
+              </div>
+              <div>
+                <label htmlFor="male">Пенсіонер</label>
+                <input type="radio" name="jobe_status" value={4} />
+              </div>
+              <div>
+                <label htmlFor="male">Інший</label>
+                <input type="radio" name="jobe_status" value={5} />
+              </div>
+            </div>
+          </RadioBlock>
+          <RadioBlock>
+            <h2>Дохід родини</h2>
+            <div className="radiGroupt">
+              <div>
+                <label htmlFor="male">до 20000</label>
+                <input type="radio" name="family_income" value={1} />
+              </div>
+              <div>
+                <label htmlFor="male">до 30000</label>
+                <input type="radio" name="family_income" value={2} />
+              </div>
+              <div>
+                <label htmlFor="male">до 40000</label>
+                <input type="radio" name="family_income" value={3} />
+              </div>
+              <div>
+                <label htmlFor="male">50000 і вище</label>
+                <input type="radio" name="family_income" value={4} />
+              </div>
+            </div>
+          </RadioBlock>
+          <RadioBlock>
+            <h2>Освіта</h2>
+            <div className="radiGroupt">
+              <div>
+                <label htmlFor="male">Середня</label>
+                <input type="radio" name="education_level" value={1} />
+              </div>
+              <div>
+                <label htmlFor="male">Коледж</label>
+                <input type="radio" name="education_level" value={2} />
+              </div>
+              <div>
+                <label htmlFor="male">Вища</label>
+                <input type="radio" name="education_level" value={3} />
+              </div>
+              <div>
+                <label htmlFor="male">Маю науковий ступінь</label>
+                <input type="radio" name="education_level" value={4} />
+              </div>
+            </div>
+          </RadioBlock>
+
+          <CheckboxBlock>
+            <h2>Ваші харчові звички здорового харчування</h2>
+            <div className="items">
+              <div>
+                <label htmlFor="">Вживаю овочі та фрукти</label>
+                <input type="checkbox" name="fruts" value={1} />
+              </div>
+              <div>
+                <label htmlFor="">
+                  Менше вживання м’яса та м’ясних виробів
+                </label>
+                <input type="checkbox" name="meat" value={2} />
+              </div>
+              <div>
+                <label htmlFor="">Зменшення цукру в харчових продуктах</label>
+                <input type="checkbox" name="shugar" value={3} />
+              </div>
+              <div>
+                <label htmlFor="">
+                  Обмежене споживання трансжирів та шкідливих жирів (смажене,
+                  фастфуду, випічки)
+                </label>
+                <input type="checkbox" name="fat" value={4} />
+              </div>
+              <div>
+                <label htmlFor="">вживання цільнозернових продуктів</label>
+                <input type="checkbox" name="zerno" value={5} />
+              </div>
+              <div>
+                <label htmlFor="">
+                  вживання продуктів з альтернативних джерел білка (соя, горох,
+                  водорості)
+                </label>
+                <input type="checkbox" name="protein" value={6} />
+              </div>
+
+              <div>
+                <label htmlFor="">збільшення кількості споживання води</label>
+                <input type="checkbox" name="water" value={7} />
+              </div>
+              <div>
+                <label htmlFor="">
+                  застосування принципів інтуїтивного харчування
+                </label>
+                <input type="checkbox" name="int" value={8} />
+              </div>
+              <div>
+                <label htmlFor="">
+                  вживання суперфудів (чіа, ягоди, горіхи, насіння льону тощо)
+                </label>
+                <input type="checkbox" name="superfood" value={9} />
+              </div>
+              <div>
+                <label htmlFor="">
+                  відвідування закладів громадського харчування зі здоровою їжею
+                </label>
+                <input type="checkbox" name="protein" value={10} />
+              </div>
+            </div>
+          </CheckboxBlock>
           <button type="submit">Відправити</button>
-        </form>
+        </StyledForm>
       </div>
     </>
   );
 }
+
+// більше вживання овочів і фруктів;
+// менше вживання м’яса та м’ясних виробів;
+// зменшення цукру в харчових продуктах
+// обмежене споживання трансжирів та шкідливих жирів (смажене, фастфуду, випічки)
+// вживання цільнозернових продуктів
+// вживання продуктів з альтернативних джерел білка (соя, горох, водорості)
+// збільшення кількості споживання води
+// застосування принципів інтуїтивного харчування
+// вживання суперфудів (чіа, ягоди, горіхи, насіння льону тощо)
+// відвідування закладів громадського харчування зі здоровою їжею
+// інше__________
