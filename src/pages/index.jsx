@@ -68,9 +68,11 @@ const createHabits = (form) => {
   const arr = [];
   if (form.fruts.checked) {
     arr.push(1);
-  } else if (form.meat.checked) {
+  }
+  if (form.meat.checked) {
     arr.push(2);
-  } else if (form.shugar.checked) {
+  }
+  if (form.shugar.checked) {
     arr.push(3);
   }
   return arr;
@@ -80,16 +82,27 @@ export default function Home() {
   const onSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const habits = [];
 
     const data = {
-      email: form.email,
-      gender: form.gender,
-      age: form.age,
-      jobe_status: form.jobe_status,
-      family_income: form.family_income,
-      education_level: form.education_level,
+      email: form.email.value,
+      gender: Number.parseInt(form.gender.value),
+      age: form.age.valueAsNumber,
+      jobe_status: Number.parseInt(form.jobe_status.value),
+      family_income: Number.parseInt(form.family_income.value),
+      education_level: Number.parseInt(form.education_level.value),
+      eating_habits: JSON.stringify(createHabits(form)),
+      food: "The food must be here",
     };
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/createFood",
+        data,
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(data);
   };
   return (
     <>
