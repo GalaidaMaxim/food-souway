@@ -1,106 +1,19 @@
 import Head from "next/head";
-import styled from "@emotion/styled";
+import { StyledForm } from "@/components/StyledForm";
 import axios from "axios";
 
-const StyledForm = styled.form`
-  width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 40px;
-  margin-top: 30px;
-  border: 3px solid brown;
-  box-shadow: 10px 10px 10px black;
-  border-radius: 20px;
-  & button {
-    padding: 20px;
-    border: 2px solid brown;
-    background-color: #ff6600;
-    border-radius: 20px;
-    margin-top: 20px;
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-  }
-`;
-const Input = styled.div`
-  margin-top: 30px;
-`;
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { LoginButton } from "@/components/LoginButton";
 
-const NamedInput = styled(Input)`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  & input {
-    height: 30px;
-  }
-`;
-
-const RadioBlock = styled(Input)`
-  & .radiGroupt {
-    display: flex;
-    justify-content: left;
-    margin-top: 20px;
-    gap: 20px;
-    & input {
-      margin-left: 10px;
-    }
-  }
-`;
-
-const CheckboxBlock = styled(Input)`
-  & .items {
-    display: flex;
-    justify-content: left;
-    flex-direction: column;
-    margin-top: 20px;
-    gap: 20px;
-    & div {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: flex-end;
-      gap: 20px;
-    }
-  }
-`;
-
-const createHabits = (form) => {
-  const arr = [];
-  if (form.fruts.checked) {
-    arr.push(1);
-  }
-  if (form.meat.checked) {
-    arr.push(2);
-  }
-  if (form.shugar.checked) {
-    arr.push(3);
-  }
-  return arr;
+export const getStaticProps = () => {
+  return { props: { clientID: process.env.CLIENT_ID } };
 };
 
-export default function Home() {
+export default function Home({ clientID }) {
   const onSubmit = async (event) => {
     event.preventDefault();
-    const form = event.target;
-
-    const data = {
-      email: form.email.value,
-      gender: Number.parseInt(form.gender.value),
-      age: form.age.valueAsNumber,
-      jobe_status: Number.parseInt(form.jobe_status.value),
-      family_income: Number.parseInt(form.family_income.value),
-      education_level: Number.parseInt(form.education_level.value),
-      eating_habits: JSON.stringify(createHabits(form)),
-      food: "The food must be here",
-    };
-    try {
-      const response = await axios.post("/api/createFood", data);
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-    console.log(data);
   };
+
   return (
     <>
       <Head>
@@ -111,6 +24,16 @@ export default function Home() {
       </Head>
       <div>
         <StyledForm onSubmit={onSubmit}>
+          <h1>
+            Дослідження моделей харчової поведінки в контексті здорового способу
+            життя
+          </h1>
+
+          <GoogleOAuthProvider clientId={clientID}>
+            <LoginButton />
+          </GoogleOAuthProvider>
+        </StyledForm>
+        {/* <StyledForm onSubmit={onSubmit}>
           <NamedInput>
             <label htmlFor="email">Email</label>
             <input type="text" id="email" />
@@ -265,7 +188,7 @@ export default function Home() {
             </div>
           </CheckboxBlock>
           <button type="submit">Відправити</button>
-        </StyledForm>
+        </StyledForm> */}
       </div>
     </>
   );
