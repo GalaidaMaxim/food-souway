@@ -3,7 +3,7 @@ import { Page } from "@/components/Page";
 
 export default () => {
   const formDataLoader = (event) => {
-    const data = { jobe_status: event.target.jobe_status.value };
+    const data = { family_income: event.target.family_income.value };
     console.log(data);
 
     return data;
@@ -14,7 +14,7 @@ export default () => {
       formDataLoader={formDataLoader}
       prevParam={"jobe_status"}
       currentParam={"family_income"} //
-      nextRoute={"/fix"}
+      nextRoute={"/education_level"}
     >
       <RadioBlock>
         <h2>Дохід родини</h2>
