@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 export const StyledForm = styled.form`
+  min-height: 80vh;
   width: 900px;
   margin-left: auto;
   margin-right: auto;
@@ -10,6 +11,9 @@ export const StyledForm = styled.form`
   border: 3px solid brown;
   box-shadow: 10px 10px 10px black;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 export const Input = styled.div`
   margin-top: 30px;

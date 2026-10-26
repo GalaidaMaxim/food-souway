@@ -1,6 +1,10 @@
 import Head from "next/head";
 import { StyledForm } from "@/components/StyledForm";
-import axios from "axios";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { useInfo } from "@/redux/selectors";
+import { setInfo } from "@/redux/slices";
+import { useEffect } from "react";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { LoginButton } from "@/components/LoginButton";
@@ -10,9 +14,20 @@ export const getStaticProps = () => {
 };
 
 export default function Home({ clientID }) {
-  const onSubmit = async (event) => {
-    event.preventDefault();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const info = useInfo();
+
+  const onLogin = (data) => {
+    const { email } = data;
+    dispatch(setInfo({ email }));
   };
+
+  useEffect(() => {
+    if (info.email) {
+      router.push("/gender");
+    }
+  }, [info]);
 
   return (
     <>
@@ -23,67 +38,19 @@ export default function Home({ clientID }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <StyledForm onSubmit={onSubmit}>
+        <StyledForm>
           <h1>
             Дослідження моделей харчової поведінки в контексті здорового способу
             життя
           </h1>
 
           <GoogleOAuthProvider clientId={clientID}>
-            <LoginButton />
+            <LoginButton onLogin={onLogin} />
           </GoogleOAuthProvider>
         </StyledForm>
         {/* <StyledForm onSubmit={onSubmit}>
-          <NamedInput>
-            <label htmlFor="email">Email</label>
-            <input type="text" id="email" />
-          </NamedInput>
-          <RadioBlock>
-            <h2>Стать</h2>
-            <div className="radiGroupt">
-              <div>
-                <label htmlFor="male">Чоловіча</label>
-                <input type="radio" name="gender" value={1} />
-              </div>
-              <div>
-                <label htmlFor="male">Жіноча</label>
-                <input type="radio" name="gender" value={2} />
-              </div>
-              <div>
-                <label htmlFor="male">Інша</label>
-                <input type="radio" name="gender" value={3} />
-              </div>
-            </div>
-          </RadioBlock>
-          <NamedInput>
-            <label htmlFor="age">Вік</label>
-            <input type="number" id="age" />
-          </NamedInput>
-          <RadioBlock>
-            <h2>Статус зайнятості</h2>
-            <div className="radiGroupt">
-              <div>
-                <label htmlFor="male">Працевлаштований</label>
-                <input type="radio" name="jobe_status" value={1} />
-              </div>
-              <div>
-                <label htmlFor="male">Безробітний</label>
-                <input type="radio" name="jobe_status" value={2} />
-              </div>
-              <div>
-                <label htmlFor="male">Студент</label>
-                <input type="radio" name="jobe_status" value={3} />
-              </div>
-              <div>
-                <label htmlFor="male">Пенсіонер</label>
-                <input type="radio" name="jobe_status" value={4} />
-              </div>
-              <div>
-                <label htmlFor="male">Інший</label>
-                <input type="radio" name="jobe_status" value={5} />
-              </div>
-            </div>
-          </RadioBlock>
+          
+          
           <RadioBlock>
             <h2>Дохід родини</h2>
             <div className="radiGroupt">
