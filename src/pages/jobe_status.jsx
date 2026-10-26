@@ -14,7 +14,7 @@ export default () => {
       formDataLoader={formDataLoader}
       prevParam={"age"}
       currentParam={"jobe_status"}
-      nextRoute={"/fix"}
+      nextRoute={"/family_income"}
     >
       <RadioBlock>
         <h2>Статус зайнятості</h2>

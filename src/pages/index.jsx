@@ -51,27 +51,7 @@ export default function Home({ clientID }) {
         {/* <StyledForm onSubmit={onSubmit}>
           
           
-          <RadioBlock>
-            <h2>Дохід родини</h2>
-            <div className="radiGroupt">
-              <div>
-                <label htmlFor="male">до 20000</label>
-                <input type="radio" name="family_income" value={1} />
-              </div>
-              <div>
-                <label htmlFor="male">до 30000</label>
-                <input type="radio" name="family_income" value={2} />
-              </div>
-              <div>
-                <label htmlFor="male">до 40000</label>
-                <input type="radio" name="family_income" value={3} />
-              </div>
-              <div>
-                <label htmlFor="male">50000 і вище</label>
-                <input type="radio" name="family_income" value={4} />
-              </div>
-            </div>
-          </RadioBlock>
+         
           <RadioBlock>
             <h2>Освіта</h2>
             <div className="radiGroupt">
