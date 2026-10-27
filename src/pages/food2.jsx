@@ -32,17 +32,19 @@ const StyledLable = styled.div`
 
 export default () => {
   const values = [
-    "yougurt",
-    "coffeCurasan",
-    "bananaBrecfast",
-    "pancakesWithHoney",
+    "borsh",
+    "chickenFile",
+    "golubzhi",
+    "heckPotato",
+    "chickenSoup",
+    "chicknRice",
   ];
   const formDataLoader = (event) => {
     const obj = {};
     values.forEach((item) => {
       obj[item] = event.target[item].checked;
     });
-    const data = { food1: JSON.stringify(obj) };
+    const data = { food2: JSON.stringify(obj) };
     return data;
   };
 
@@ -50,12 +52,43 @@ export default () => {
     <Page
       formDataLoader={formDataLoader}
       prevParam={"food1"}
-      currentParam={"food2"} //food1
-      nextRoute={"/fix"}
+      currentParam={"food2"} //food2
+      nextRoute={"/food3"}
     >
       <CheckboxBlock>
-        <h2>Оберіть страви які б ви вибрали на сніданок</h2>
-        <StyledFoodList></StyledFoodList>
+        <h2>Оберіть страви, які б ви вибрали на обід</h2>
+        <StyledFoodList>
+          <FoodCard
+            name={values[0]}
+            image={"./images/borsh.jpg"}
+            lable={"Український борщ зі сметаною"}
+          />
+          <FoodCard
+            name={values[1]}
+            image={"./images/chickedFile.jpg"}
+            lable={"Запечене куряче філе з гречкою та салатом"}
+          />
+          <FoodCard
+            name={values[2]}
+            image={"./images/golubzhi.jpg"}
+            lable={"Голубці з м'ясом і рисом"}
+          />
+          <FoodCard
+            name={values[3]}
+            image={"./images/heckPotato.jpg"}
+            lable={"Запечений хек з картоплею та овочами"}
+          />
+          <FoodCard
+            name={values[4]}
+            image={"./images/chickenSoup.jpg"}
+            lable={"Запечений хек з картоплею та овочами"}
+          />
+          <FoodCard
+            name={values[5]}
+            image={"./images/chicknRice.jpg"}
+            lable={"Курячі тефтелі з рисом і тушкованими овочами"}
+          />
+        </StyledFoodList>
       </CheckboxBlock>
     </Page>
   );

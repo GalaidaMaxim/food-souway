@@ -16,6 +16,8 @@ export default () => {
     "coffeCurasan",
     "bananaBrecfast",
     "pancakesWithHoney",
+    "eggs",
+    "sandwich",
   ];
   const formDataLoader = (event) => {
     const obj = {};
@@ -61,6 +63,18 @@ export default () => {
             image="./images/pancakes.jpg"
             value={4}
             name={values[3]}
+          />
+          <FoodCard
+            lable="Яєчня з сосисками"
+            image="./images/eggs.jpg"
+            value={4}
+            name={values[4]}
+          />
+          <FoodCard
+            lable="Бутерброди з беконом та сиром"
+            image="./images/sandwich.jpg"
+            value={4}
+            name={values[5]}
           />
         </StyledFoodList>
       </CheckboxBlock>

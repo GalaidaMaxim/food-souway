@@ -20,6 +20,7 @@ const StyledLable = styled.button`
     display: block;
     width: 100%;
     height: auto;
+    border-radius: 20px;
   }
   & lable {
     display: flex;
