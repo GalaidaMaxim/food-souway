@@ -1,11 +1,10 @@
 import { CheckboxBlock } from "@/components/StyledForm";
 import { Page } from "@/components/Page";
+import { createHabits } from "@/components/StyledForm";
 
 export default () => {
   const formDataLoader = (event) => {
-    const data = { family_income: event.target.family_income.value };
-    console.log(data);
-
+    const data = { eating_habits: createHabits(event.target) };
     return data;
   };
 
@@ -14,7 +13,7 @@ export default () => {
       formDataLoader={formDataLoader}
       prevParam={"family_income"}
       currentParam={"eating_habits"} //eating_habits
-      nextRoute={"/fix"}
+      nextRoute={"/food1"}
     >
       <CheckboxBlock>
         <h2>Ваші харчові звички здорового харчування</h2>

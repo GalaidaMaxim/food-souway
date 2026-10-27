@@ -25,8 +25,10 @@ export default function Home({ clientID }) {
 
   useEffect(() => {
     if (info.email) {
-      router.push("/gender");
+      router.push("/food1");
+      return;
     }
+    // dispatch(setInfo({ }));
   }, [info]);
 
   return (
