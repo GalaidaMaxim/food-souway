@@ -1,6 +1,5 @@
 import { CheckboxBlock } from "@/components/StyledForm";
 import { Page } from "@/components/Page";
-import { createHabits } from "@/components/StyledForm";
 import styled from "@emotion/styled";
 import { FoodCard } from "@/components/FoodFard";
 
@@ -11,29 +10,21 @@ const StyledFoodList = styled.div`
   grid-template-columns: repeat(3, 1fr);
 `;
 
-const StyledLable = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  & img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  & lable {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: space-between;
-    gap: 20px;
-  }
-`;
-
 export default () => {
+  const values = [
+    "yougurt",
+    "coffeCurasan",
+    "bananaBrecfast",
+    "pancakesWithHoney",
+  ];
   const formDataLoader = (event) => {
-    const data = { eating_habits: createHabits(event.target) };
+    const obj = {};
+    values.forEach((item) => {
+      console.log(event.target[item]);
+
+      obj[item] = event.target[item].checked;
+    });
+    const data = { food1: JSON.stringify(obj) };
     return data;
   };
 
@@ -42,7 +33,7 @@ export default () => {
       formDataLoader={formDataLoader}
       prevParam={"email"}
       currentParam={"food1"} //food1
-      nextRoute={"/fix"}
+      nextRoute={"/food2"}
     >
       <CheckboxBlock>
         <h2>Оберіть страви які б ви вибрали на сніданок</h2>
@@ -51,25 +42,25 @@ export default () => {
             lable="Йогурт"
             image="./images/yogurt.png"
             value={1}
-            name="yougurt"
+            name={values[0]}
           />
           <FoodCard
             lable="Кава з круасаном"
             image="./images/coffeCurasan.png"
             value={2}
-            name="coffeCurasan"
+            name={values[1]}
           />
           <FoodCard
             lable="Молочна каша з фруктами"
             image="./images/bananaBrecfast.jpg"
             value={3}
-            name="bananaBrecfast"
+            name={values[2]}
           />
           <FoodCard
             lable="Млинці з медом"
             image="./images/pancakes.jpg"
-            value={3}
-            name="pancakesWithHoney"
+            value={4}
+            name={values[3]}
           />
         </StyledFoodList>
       </CheckboxBlock>

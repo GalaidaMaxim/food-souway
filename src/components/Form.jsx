@@ -9,6 +9,7 @@ const ButtonContainer = styled.div`
   display: flex;
   gap: 20px;
   justify-content: center;
+  margin-top: 20px;
 `;
 
 const ControlButton = styled(BaseButton)`

@@ -50,14 +50,6 @@ export default function Home({ clientID }) {
             <LoginButton onLogin={onLogin} />
           </GoogleOAuthProvider>
         </StyledForm>
-        {/* <StyledForm onSubmit={onSubmit}>
-          
-          
-         
-         
-        
-          <button type="submit">Відправити</button>
-        </StyledForm> */}
       </div>
     </>
   );
