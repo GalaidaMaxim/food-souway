@@ -16,8 +16,8 @@ export default () => {
     "yogurtFuts",
     "smuzi",
     "chocolate",
-    "beens",
-    "lazyVarenyks",
+    "appleChips",
+    "sandwichCheese",
   ];
   const formDataLoader = (event) => {
     const obj = {};
@@ -60,13 +60,13 @@ export default () => {
           />
           <FoodCard
             name={values[4]}
-            image={"./images/beens.jpg"}
-            lable={"Тушкована квасоля з овочами"}
+            image={"./images/appleChips.jpg"}
+            lable={"Яблучні чипси"}
           />
           <FoodCard
             name={values[5]}
-            image={"./images/lazyVarenyks.jpg"}
-            lable={"Ліниві вареники із кисломолочного сиру"}
+            image={"./images/sandwichCheese.jpg"}
+            lable={"Бутерброди з сиром та огірками"}
           />
         </StyledFoodList>
       </CheckboxBlock>
