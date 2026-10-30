@@ -42,36 +42,36 @@ export default () => {
             <input type="checkbox" name={habits[3]} value={4} />
           </div>
           <div>
-            <label htmlFor="">вживання цільнозернових продуктів</label>
+            <label htmlFor="">Вживання цільнозернових продуктів</label>
             <input type="checkbox" name={habits[4]} value={5} />
           </div>
           <div>
             <label htmlFor="">
-              вживання продуктів з альтернативних джерел білка (соя, горох,
+              Вживання продуктів з альтернативних джерел білка (соя, горох,
               водорості)
             </label>
             <input type="checkbox" name={habits[5]} value={6} />
           </div>
 
           <div>
-            <label htmlFor="">збільшення кількості споживання води</label>
+            <label htmlFor="">Збільшення кількості споживання води</label>
             <input type="checkbox" name={habits[6]} value={7} />
           </div>
           <div>
             <label htmlFor="">
-              застосування принципів інтуїтивного харчування
+              Застосування принципів інтуїтивного харчування
             </label>
             <input type="checkbox" name={habits[7]} value={8} />
           </div>
           <div>
             <label htmlFor="">
-              вживання суперфудів (чіа, ягоди, горіхи, насіння льону тощо)
+              Вживання суперфудів (чіа, ягоди, горіхи, насіння льону тощо)
             </label>
             <input type="checkbox" name={habits[8]} value={9} />
           </div>
           <div>
             <label htmlFor="">
-              відвідування закладів громадського харчування зі здоровою їжею
+              Відвідування закладів громадського харчування зі здоровою їжею
             </label>
             <input type="checkbox" name={habits[9]} value={10} />
           </div>

@@ -14,7 +14,7 @@ export default () => {
       formDataLoader={formDataLoader}
       prevParam={"food4"}
       currentParam={"choise_paramiters"} //eating_habits
-      nextRoute={"/food112"}
+      nextRoute={"/info_source"}
     >
       <CheckboxBlock>
         <h2>Що найчастіше впливає на Ваш вибір продуктів?</h2>
