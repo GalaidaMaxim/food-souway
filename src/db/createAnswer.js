@@ -16,7 +16,7 @@ export const createAnswer = async ({
 
   try {
     const result = await connection.query(
-      "INSERT INTO consumer_data (google_id, gender, age, jobe_status, family_income, education_level, eating_habits, food, info_source, choise_paramiters) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, %9) RETURNING *",
+      "INSERT INTO consumer_data (google_id, gender, age, jobe_status, family_income, education_level, eating_habits, food, info_source, choise_paramiters) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
       [
         google_id,
         gender,
@@ -34,8 +34,6 @@ export const createAnswer = async ({
     return result.rows;
   } catch (err) {
     connection.release();
-    console.log(err);
-
     throw err;
   }
 };

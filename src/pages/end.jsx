@@ -3,10 +3,16 @@ import { StyledForm } from "@/components/StyledForm";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { useInfo } from "@/redux/selectors";
-import { setInfo } from "@/redux/slices";
+import {
+  disableLoader,
+  enableLoader,
+  resetInfo,
+  setInfo,
+} from "@/redux/slices";
 import { useEffect } from "react";
 import { createFood } from "@/service/crewateFood";
 import { Loader } from "@/components/Loader";
+import { useLoader } from "@/redux/selectors";
 
 import styled from "@emotion/styled";
 
@@ -32,6 +38,63 @@ const ThisForm = styled(StyledForm)`
 export default function Home() {
   const router = useRouter();
   const dispatch = useDispatch();
+  const loader = useLoader();
+  const info = useInfo();
+
+  useEffect(() => {
+    (async () => {
+      dispatch(enableLoader());
+      if (
+        !info.email ||
+        !info.gender ||
+        !info.age ||
+        !info.jobe_status ||
+        !info.family_income ||
+        !info.education_level ||
+        !info.eating_habits ||
+        !info.food1 ||
+        !info.food2 ||
+        !info.food3 ||
+        !info.food4 ||
+        !info.info_source ||
+        !info.choise_paramiters
+      ) {
+        console.log("No info");
+        router.replace("/");
+        return;
+      }
+      try {
+        const food = {
+          ...JSON.parse(info.food1),
+          ...JSON.parse(info.food2),
+          ...JSON.parse(info.food3),
+          ...JSON.parse(info.food4),
+        };
+        console.log(food);
+        const data = await createFood({
+          google_id: info.email,
+          gender: info.gender,
+          age: info.age,
+          jobe_status: info.jobe_status,
+          family_income: info.family_income,
+          education_level: info.education_level,
+          eating_habits: JSON.stringify(info.eating_habits),
+          food: JSON.stringify(food),
+          info_source: JSON.stringify(info.info_source),
+          choise_paramiters: JSON.stringify(info.choise_paramiters),
+        });
+        console.log(data);
+
+        setTimeout(() => {
+          dispatch(resetInfo());
+          router.replace("/");
+        }, 3000);
+      } catch (err) {
+        console.log(err);
+      }
+      dispatch(disableLoader());
+    })();
+  }, [dispatch, info]);
 
   return (
     <>
@@ -42,7 +105,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <Loader />
+        {loader && <Loader />}
         <ThisForm>
           <div>
             <h1>

@@ -7,6 +7,7 @@ import { setInfo } from "@/redux/slices";
 import { useEffect } from "react";
 import { BaseButton } from "@/components/BaseButton";
 import styled from "@emotion/styled";
+import { createFood } from "@/service/crewateFood";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { LoginButton } from "@/components/LoginButton";
