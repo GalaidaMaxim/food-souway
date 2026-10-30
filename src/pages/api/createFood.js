@@ -2,13 +2,13 @@
 import { createAnswer } from "@/db/createAnswer";
 
 export default async function handler(req, res) {
-  console.log(req.method);
-
   if (req.method === "POST") {
     try {
       await createAnswer(req.body);
       res.status(200).end();
     } catch (err) {
+      console.log(err);
+
       res.status(400).end();
     }
 

@@ -1,106 +1,50 @@
 import Head from "next/head";
+import { StyledForm } from "@/components/StyledForm";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { useInfo } from "@/redux/selectors";
+import { setInfo } from "@/redux/slices";
+import { useEffect } from "react";
+import { BaseButton } from "@/components/BaseButton";
 import styled from "@emotion/styled";
-import axios from "axios";
+import { createFood } from "@/service/crewateFood";
 
-const StyledForm = styled.form`
-  width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 40px;
-  margin-top: 30px;
-  border: 3px solid brown;
-  box-shadow: 10px 10px 10px black;
-  border-radius: 20px;
-  & button {
-    padding: 20px;
-    border: 2px solid brown;
-    background-color: #ff6600;
-    border-radius: 20px;
-    margin-top: 20px;
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-  }
-`;
-const Input = styled.div`
-  margin-top: 30px;
-`;
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { LoginButton } from "@/components/LoginButton";
 
-const NamedInput = styled(Input)`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  & input {
-    height: 30px;
-  }
-`;
-
-const RadioBlock = styled(Input)`
-  & .radiGroupt {
-    display: flex;
-    justify-content: left;
-    margin-top: 20px;
-    gap: 20px;
-    & input {
-      margin-left: 10px;
-    }
-  }
-`;
-
-const CheckboxBlock = styled(Input)`
-  & .items {
-    display: flex;
-    justify-content: left;
-    flex-direction: column;
-    margin-top: 20px;
-    gap: 20px;
-    & div {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: flex-end;
-      gap: 20px;
-    }
-  }
-`;
-
-const createHabits = (form) => {
-  const arr = [];
-  if (form.fruts.checked) {
-    arr.push(1);
-  }
-  if (form.meat.checked) {
-    arr.push(2);
-  }
-  if (form.shugar.checked) {
-    arr.push(3);
-  }
-  return arr;
+export const getStaticProps = () => {
+  return { props: { clientID: process.env.CLIENT_ID } };
 };
 
-export default function Home() {
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.target;
-
-    const data = {
-      email: form.email.value,
-      gender: Number.parseInt(form.gender.value),
-      age: form.age.valueAsNumber,
-      jobe_status: Number.parseInt(form.jobe_status.value),
-      family_income: Number.parseInt(form.family_income.value),
-      education_level: Number.parseInt(form.education_level.value),
-      eating_habits: JSON.stringify(createHabits(form)),
-      food: "The food must be here",
-    };
-    try {
-      const response = await axios.post("/api/createFood", data);
-      console.log(response);
-    } catch (err) {
-      console.log(err);
+const ThisForm = styled(StyledForm)`
+  text-align: center;
+  padding-top: 70px;
+  & h1 {
+    font-size: 25px;
+    @media screen and (min-width: 768px) {
+      font-size: 50px;
     }
-    console.log(data);
+  }
+  & p {
+    font-size: 16px;
+    margin-top: 50px;
+    @media screen and (min-width: 768px) {
+      font-size: 24px;
+      margin-top: 80px;
+    }
+
+    text-align: justify;
+  }
+`;
+
+export default function Home({ clientID }) {
+  const router = useRouter();
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    router.push("/policy");
   };
+
   return (
     <>
       <Head>
@@ -110,162 +54,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <StyledForm onSubmit={onSubmit}>
-          <NamedInput>
-            <label htmlFor="email">Email</label>
-            <input type="text" id="email" />
-          </NamedInput>
-          <RadioBlock>
-            <h2>Стать</h2>
-            <div className="radiGroupt">
-              <div>
-                <label htmlFor="male">Чоловіча</label>
-                <input type="radio" name="gender" value={1} />
-              </div>
-              <div>
-                <label htmlFor="male">Жіноча</label>
-                <input type="radio" name="gender" value={2} />
-              </div>
-              <div>
-                <label htmlFor="male">Інша</label>
-                <input type="radio" name="gender" value={3} />
-              </div>
-            </div>
-          </RadioBlock>
-          <NamedInput>
-            <label htmlFor="age">Вік</label>
-            <input type="number" id="age" />
-          </NamedInput>
-          <RadioBlock>
-            <h2>Статус зайнятості</h2>
-            <div className="radiGroupt">
-              <div>
-                <label htmlFor="male">Працевлаштований</label>
-                <input type="radio" name="jobe_status" value={1} />
-              </div>
-              <div>
-                <label htmlFor="male">Безробітний</label>
-                <input type="radio" name="jobe_status" value={2} />
-              </div>
-              <div>
-                <label htmlFor="male">Студент</label>
-                <input type="radio" name="jobe_status" value={3} />
-              </div>
-              <div>
-                <label htmlFor="male">Пенсіонер</label>
-                <input type="radio" name="jobe_status" value={4} />
-              </div>
-              <div>
-                <label htmlFor="male">Інший</label>
-                <input type="radio" name="jobe_status" value={5} />
-              </div>
-            </div>
-          </RadioBlock>
-          <RadioBlock>
-            <h2>Дохід родини</h2>
-            <div className="radiGroupt">
-              <div>
-                <label htmlFor="male">до 20000</label>
-                <input type="radio" name="family_income" value={1} />
-              </div>
-              <div>
-                <label htmlFor="male">до 30000</label>
-                <input type="radio" name="family_income" value={2} />
-              </div>
-              <div>
-                <label htmlFor="male">до 40000</label>
-                <input type="radio" name="family_income" value={3} />
-              </div>
-              <div>
-                <label htmlFor="male">50000 і вище</label>
-                <input type="radio" name="family_income" value={4} />
-              </div>
-            </div>
-          </RadioBlock>
-          <RadioBlock>
-            <h2>Освіта</h2>
-            <div className="radiGroupt">
-              <div>
-                <label htmlFor="male">Середня</label>
-                <input type="radio" name="education_level" value={1} />
-              </div>
-              <div>
-                <label htmlFor="male">Коледж</label>
-                <input type="radio" name="education_level" value={2} />
-              </div>
-              <div>
-                <label htmlFor="male">Вища</label>
-                <input type="radio" name="education_level" value={3} />
-              </div>
-              <div>
-                <label htmlFor="male">Маю науковий ступінь</label>
-                <input type="radio" name="education_level" value={4} />
-              </div>
-            </div>
-          </RadioBlock>
+        <ThisForm onSubmit={onSubmit}>
+          <div>
+            <h1>
+              Дослідження моделей харчової поведінки в контексті здорового
+              способу життя
+            </h1>
 
-          <CheckboxBlock>
-            <h2>Ваші харчові звички здорового харчування</h2>
-            <div className="items">
-              <div>
-                <label htmlFor="">Вживаю овочі та фрукти</label>
-                <input type="checkbox" name="fruts" value={1} />
-              </div>
-              <div>
-                <label htmlFor="">
-                  Менше вживання м’яса та м’ясних виробів
-                </label>
-                <input type="checkbox" name="meat" value={2} />
-              </div>
-              <div>
-                <label htmlFor="">Зменшення цукру в харчових продуктах</label>
-                <input type="checkbox" name="shugar" value={3} />
-              </div>
-              <div>
-                <label htmlFor="">
-                  Обмежене споживання трансжирів та шкідливих жирів (смажене,
-                  фастфуду, випічки)
-                </label>
-                <input type="checkbox" name="fat" value={4} />
-              </div>
-              <div>
-                <label htmlFor="">вживання цільнозернових продуктів</label>
-                <input type="checkbox" name="zerno" value={5} />
-              </div>
-              <div>
-                <label htmlFor="">
-                  вживання продуктів з альтернативних джерел білка (соя, горох,
-                  водорості)
-                </label>
-                <input type="checkbox" name="protein" value={6} />
-              </div>
-
-              <div>
-                <label htmlFor="">збільшення кількості споживання води</label>
-                <input type="checkbox" name="water" value={7} />
-              </div>
-              <div>
-                <label htmlFor="">
-                  застосування принципів інтуїтивного харчування
-                </label>
-                <input type="checkbox" name="int" value={8} />
-              </div>
-              <div>
-                <label htmlFor="">
-                  вживання суперфудів (чіа, ягоди, горіхи, насіння льону тощо)
-                </label>
-                <input type="checkbox" name="superfood" value={9} />
-              </div>
-              <div>
-                <label htmlFor="">
-                  відвідування закладів громадського харчування зі здоровою їжею
-                </label>
-                <input type="checkbox" name="protein" value={10} />
-              </div>
-            </div>
-          </CheckboxBlock>
-          <button type="submit">Відправити</button>
-        </StyledForm>
+            <p>
+              Привіт, друже! Допоможи нам сформувати тренди здорового харчування
+              в українському сегменті споживачів
+            </p>
+          </div>
+          <BaseButton>Почати</BaseButton>
+        </ThisForm>
       </div>
     </>
   );
