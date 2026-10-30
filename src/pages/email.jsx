@@ -5,6 +5,9 @@ import { useDispatch } from "react-redux";
 import { useInfo } from "@/redux/selectors";
 import { setInfo } from "@/redux/slices";
 import { useEffect } from "react";
+import { Loader } from "@/components/Loader";
+import { useLoader } from "@/redux/selectors";
+import { checkAnswer } from "@/service/checkAnswer";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { LoginButton } from "@/components/LoginButton";
@@ -17,18 +20,25 @@ export default function Home({ clientID }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const info = useInfo();
+  const loader = useLoader();
 
-  const onLogin = (data) => {
+  const onLogin = async (data) => {
     const { email } = data;
-    dispatch(setInfo({ email }));
+    try {
+      const data = await checkAnswer({ google_id: email });
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+    // dispatch(setInfo({ email }));
   };
 
-  useEffect(() => {
-    if (info.email) {
-      router.push("/gender");
-      return;
-    }
-  }, [info]);
+  // useEffect(() => {
+  //   if (info.email) {
+  //     router.push("/gender");
+  //     return;
+  //   }
+  // }, [info]);
 
   return (
     <>
@@ -38,6 +48,7 @@ export default function Home({ clientID }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {loader && <Loader />}
       <div>
         <StyledForm>
           <h1>

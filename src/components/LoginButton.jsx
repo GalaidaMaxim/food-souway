@@ -23,7 +23,7 @@ export const LoginButton = ({ onLogin = () => {} }) => {
         "https://www.googleapis.com/oauth2/v3/userinfo",
         { headers: { Authorization: `Bearer ${response.access_token}` } },
       );
-      onLogin(res.data);
+      await onLogin(res.data);
     } catch (err) {
       console.log(err);
     }
