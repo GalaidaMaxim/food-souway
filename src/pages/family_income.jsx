@@ -17,7 +17,7 @@ export default () => {
       nextRoute={"/education_level"}
     >
       <RadioBlock>
-        <h2>Дохід родини</h2>
+        <h2>Який середньомісячний дохід вашої родини?</h2>
         <div className="radiGroupt">
           <div>
             <label htmlFor="male">до 20000</label>

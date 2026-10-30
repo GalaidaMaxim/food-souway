@@ -17,7 +17,7 @@ export default () => {
       nextRoute={"/eating_habits"}
     >
       <RadioBlock>
-        <h2>Освіта</h2>
+        <h2>Який ваш найвищий здобутий рівень освіти?</h2>
         <div className="radiGroupt">
           <div>
             <label htmlFor="male">Середня</label>
