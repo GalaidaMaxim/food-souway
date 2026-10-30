@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useInfo } from "@/redux/selectors";
 import { setInfo } from "@/redux/slices";
 import { useEffect } from "react";
-import { BaseButton } from "@/components/BaseButton";
+
 import styled from "@emotion/styled";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
