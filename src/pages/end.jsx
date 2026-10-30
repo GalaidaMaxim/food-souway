@@ -16,9 +16,6 @@ import { useLoader } from "@/redux/selectors";
 
 import styled from "@emotion/styled";
 
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { LoginButton } from "@/components/LoginButton";
-
 export const getStaticProps = () => {
   return { props: { clientID: process.env.CLIENT_ID } };
 };
@@ -27,7 +24,10 @@ const ThisForm = styled(StyledForm)`
   text-align: center;
   padding-top: 70px;
   & h1 {
-    font-size: 50px;
+    font-size: 25px;
+    @media screen and (min-width: 768px) {
+      font-size: 50px;
+    }
   }
   & p {
     margin-top: 80px;
@@ -43,7 +43,6 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      dispatch(enableLoader());
       if (
         !info.email ||
         !info.gender ||
@@ -71,6 +70,8 @@ export default function Home() {
           ...JSON.parse(info.food4),
         };
         console.log(food);
+        dispatch(enableLoader());
+
         const data = await createFood({
           google_id: info.email,
           gender: info.gender,
@@ -84,15 +85,14 @@ export default function Home() {
           choise_paramiters: JSON.stringify(info.choise_paramiters),
         });
         console.log(data);
+        dispatch(disableLoader());
 
         setTimeout(() => {
           dispatch(resetInfo());
-          router.replace("/");
         }, 3000);
       } catch (err) {
         console.log(err);
       }
-      dispatch(disableLoader());
     })();
   }, [dispatch, info]);
 

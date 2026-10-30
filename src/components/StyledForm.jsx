@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
 export const StyledForm = styled.form`
-  min-height: 80vh;
-  width: 900px;
+  min-height: 90vh;
+
   margin-left: auto;
   margin-right: auto;
   padding: 40px;
@@ -15,8 +15,27 @@ export const StyledForm = styled.form`
   flex-direction: column;
   justify-content: space-between;
   /* align-items: center; */
+  @media screen and (min-width: 1000px) {
+    width: 900px;
+    min-height: 80vh;
+  }
+  & h1 {
+    @media screen and (max-width: 767px) {
+      font-size: 24px;
+    }
+  }
   & h2 {
-    font-size: 32px;
+    font-size: 24px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 32px;
+    }
+  }
+  & .error {
+    color: red;
+  }
+  & p {
+    margin-top: 40px;
   }
 `;
 export const Input = styled.div`

@@ -8,12 +8,17 @@ const StyledLoginButton = styled(BaseButton)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  width: 100%;
   gap: 10px;
   font-size: 14px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 300px;
+  margin-top: 100px;
+
+  @media screen and (min-width: 768px) {
+    width: 300px;
+    margin-top: 300px;
+  }
 `;
 
 export const LoginButton = ({ onLogin = () => {} }) => {

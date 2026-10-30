@@ -20,11 +20,18 @@ const ThisForm = styled(StyledForm)`
   padding-top: 70px;
   align-items: center;
   & h1 {
-    font-size: 50px;
+    font-size: 25px;
+    @media screen and (min-width: 768px) {
+      font-size: 50px;
+    }
   }
   & p {
-    margin-top: 80px;
-    font-size: 24px;
+    margin-top: 50px;
+    font-size: 14px;
+    @media screen and (min-width: 768px) {
+      font-size: 24px;
+      margin-top: 80px;
+    }
     text-align: justify;
   }
   & .privat {
@@ -36,7 +43,10 @@ const ThisForm = styled(StyledForm)`
     font-weight: 800;
   }
   & button {
-    width: 300px;
+    width: 100%;
+    @media screen and (min-width: 768px) {
+      width: 300px;
+    }
     margin-left: auto;
     margin-right: auto;
   }

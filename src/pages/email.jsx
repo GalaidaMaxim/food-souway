@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { Loader } from "@/components/Loader";
 import { useLoader } from "@/redux/selectors";
 import { checkAnswer } from "@/service/checkAnswer";
+import { useState } from "react";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { LoginButton } from "@/components/LoginButton";
@@ -21,24 +22,29 @@ export default function Home({ clientID }) {
   const dispatch = useDispatch();
   const info = useInfo();
   const loader = useLoader();
+  const [error, setError] = useState(false);
 
   const onLogin = async (data) => {
     const { email } = data;
+    setError(false);
     try {
       const data = await checkAnswer({ google_id: email });
-      console.log(data);
+      if (data.length !== 0) {
+        setError(true);
+        return;
+      }
+      dispatch(setInfo({ email }));
     } catch (err) {
       console.log(err);
     }
-    // dispatch(setInfo({ email }));
   };
 
-  // useEffect(() => {
-  //   if (info.email) {
-  //     router.push("/gender");
-  //     return;
-  //   }
-  // }, [info]);
+  useEffect(() => {
+    if (info.email) {
+      router.push("/gender");
+      return;
+    }
+  }, [info]);
 
   return (
     <>
@@ -59,6 +65,12 @@ export default function Home({ clientID }) {
             Авторизація потрібна для ідентифікації користувача та збереження
             виключно унікальних результатів опитування.
           </p>
+          {error && (
+            <p className="error">
+              Цей користувач вже надав свою відповідь на опитування.
+              Використайте інший обліковий запис
+            </p>
+          )}
 
           <GoogleOAuthProvider clientId={clientID}>
             <LoginButton onLogin={onLogin} />

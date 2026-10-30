@@ -6,8 +6,10 @@ import { FoodCard } from "@/components/FoodFard";
 const StyledFoodList = styled.div`
   margin-top: 30px;
   gap: 30px;
+  @media screen and( min-width: 768px ) {
+    grid-template-columns: repeat(3, 1fr);
+  }
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
 `;
 
 export default () => {

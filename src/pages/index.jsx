@@ -20,12 +20,19 @@ const ThisForm = styled(StyledForm)`
   text-align: center;
   padding-top: 70px;
   & h1 {
-    font-size: 50px;
+    font-size: 25px;
+    @media screen and (min-width: 768px) {
+      font-size: 50px;
+    }
   }
   & p {
-    font-size: 24px;
+    font-size: 16px;
+    margin-top: 50px;
+    @media screen and (min-width: 768px) {
+      font-size: 24px;
+      margin-top: 80px;
+    }
 
-    margin-top: 80px;
     text-align: justify;
   }
 `;
