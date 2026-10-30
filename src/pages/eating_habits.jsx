@@ -1,6 +1,7 @@
 import { CheckboxBlock } from "@/components/StyledForm";
 import { Page } from "@/components/Page";
-import { createHabits } from "@/components/StyledForm";
+import { createHabits } from "@/service/createHabits";
+import { habits } from "@/service/dataArrs";
 
 export default () => {
   const formDataLoader = (event) => {
@@ -16,60 +17,63 @@ export default () => {
       nextRoute={"/food1"}
     >
       <CheckboxBlock>
-        <h2>Ваші харчові звички здорового харчування</h2>
+        <h2>
+          Ваші харчові звички здорового харчування (Можна обрати кілька
+          варіантів)
+        </h2>
         <div className="items">
           <div>
             <label htmlFor="">Вживаю овочі та фрукти</label>
-            <input type="checkbox" name="fruts" value={1} />
+            <input type="checkbox" name={habits[0]} value={1} />
           </div>
           <div>
             <label htmlFor="">Менше вживання м’яса та м’ясних виробів</label>
-            <input type="checkbox" name="meat" value={2} />
+            <input type="checkbox" name={habits[1]} value={2} />
           </div>
           <div>
             <label htmlFor="">Зменшення цукру в харчових продуктах</label>
-            <input type="checkbox" name="shugar" value={3} />
+            <input type="checkbox" name={habits[2]} value={3} />
           </div>
           <div>
             <label htmlFor="">
               Обмежене споживання трансжирів та шкідливих жирів (смажене,
               фастфуду, випічки)
             </label>
-            <input type="checkbox" name="fat" value={4} />
+            <input type="checkbox" name={habits[3]} value={4} />
           </div>
           <div>
             <label htmlFor="">вживання цільнозернових продуктів</label>
-            <input type="checkbox" name="zerno" value={5} />
+            <input type="checkbox" name={habits[4]} value={5} />
           </div>
           <div>
             <label htmlFor="">
               вживання продуктів з альтернативних джерел білка (соя, горох,
               водорості)
             </label>
-            <input type="checkbox" name="protein" value={6} />
+            <input type="checkbox" name={habits[5]} value={6} />
           </div>
 
           <div>
             <label htmlFor="">збільшення кількості споживання води</label>
-            <input type="checkbox" name="water" value={7} />
+            <input type="checkbox" name={habits[6]} value={7} />
           </div>
           <div>
             <label htmlFor="">
               застосування принципів інтуїтивного харчування
             </label>
-            <input type="checkbox" name="int" value={8} />
+            <input type="checkbox" name={habits[7]} value={8} />
           </div>
           <div>
             <label htmlFor="">
               вживання суперфудів (чіа, ягоди, горіхи, насіння льону тощо)
             </label>
-            <input type="checkbox" name="superfood" value={9} />
+            <input type="checkbox" name={habits[8]} value={9} />
           </div>
           <div>
             <label htmlFor="">
               відвідування закладів громадського харчування зі здоровою їжею
             </label>
-            <input type="checkbox" name="protein" value={10} />
+            <input type="checkbox" name={habits[9]} value={10} />
           </div>
         </div>
       </CheckboxBlock>

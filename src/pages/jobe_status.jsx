@@ -17,7 +17,7 @@ export default () => {
       nextRoute={"/family_income"}
     >
       <RadioBlock>
-        <h2>Статус зайнятості</h2>
+        <h2>Який ваш поточний статус зайнятості?</h2>
         <div className="radiGroupt">
           <div>
             <label htmlFor="male">Працевлаштований</label>

@@ -16,7 +16,7 @@ export default () => {
       nextRoute={"/jobe_status"}
     >
       <NamedInput>
-        <label htmlFor="age">Вік</label>
+        <label htmlFor="age">Скільки вам повних років?</label>
         <input type="number" id="age" />
       </NamedInput>
     </Page>

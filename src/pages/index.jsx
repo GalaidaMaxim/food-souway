@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { useInfo } from "@/redux/selectors";
 import { setInfo } from "@/redux/slices";
 import { useEffect } from "react";
+import { BaseButton } from "@/components/BaseButton";
+import styled from "@emotion/styled";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { LoginButton } from "@/components/LoginButton";
@@ -13,23 +15,27 @@ export const getStaticProps = () => {
   return { props: { clientID: process.env.CLIENT_ID } };
 };
 
+const ThisForm = styled(StyledForm)`
+  text-align: center;
+  padding-top: 70px;
+  & h1 {
+    font-size: 50px;
+  }
+  & p {
+    font-size: 24px;
+
+    margin-top: 80px;
+    text-align: justify;
+  }
+`;
+
 export default function Home({ clientID }) {
   const router = useRouter();
-  const dispatch = useDispatch();
-  const info = useInfo();
 
-  const onLogin = (data) => {
-    const { email } = data;
-    dispatch(setInfo({ email }));
+  const onSubmit = (event) => {
+    event.preventDefault();
+    router.push("/policy");
   };
-
-  useEffect(() => {
-    if (info.email) {
-      router.push("/food1");
-      return;
-    }
-    // dispatch(setInfo({ }));
-  }, [info]);
 
   return (
     <>
@@ -40,16 +46,20 @@ export default function Home({ clientID }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <StyledForm>
-          <h1>
-            Дослідження моделей харчової поведінки в контексті здорового способу
-            життя
-          </h1>
+        <ThisForm onSubmit={onSubmit}>
+          <div>
+            <h1>
+              Дослідження моделей харчової поведінки в контексті здорового
+              способу життя
+            </h1>
 
-          <GoogleOAuthProvider clientId={clientID}>
-            <LoginButton onLogin={onLogin} />
-          </GoogleOAuthProvider>
-        </StyledForm>
+            <p>
+              Привіт, друже! Допоможи нам сформувати тренди здорового харчування
+              в українському сегменті споживачів
+            </p>
+          </div>
+          <BaseButton>Почати</BaseButton>
+        </ThisForm>
       </div>
     </>
   );

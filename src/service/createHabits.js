@@ -1,13 +1,19 @@
+import { habits, choiceParams } from "./dataArrs";
+
 export const createHabits = (form) => {
   const arr = [];
-  if (form.fruts.checked) {
-    arr.push(1);
-  }
-  if (form.meat.checked) {
-    arr.push(2);
-  }
-  if (form.shugar.checked) {
-    arr.push(3);
-  }
+  habits.forEach((item) => {
+    arr.push({ [item]: form[item].checked });
+  });
+  console.log(arr);
+
+  return arr;
+};
+
+export const createInfo = (form, info) => {
+  const arr = [];
+  info.forEach((item) => {
+    arr.push({ [item]: form[item].checked });
+  });
   return arr;
 };

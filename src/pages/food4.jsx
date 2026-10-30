@@ -33,7 +33,7 @@ export default () => {
       formDataLoader={formDataLoader}
       prevParam={"food3"}
       currentParam={"food4"} //food2
-      nextRoute={"/fix"}
+      nextRoute={"/choise_paramiters"}
     >
       <CheckboxBlock>
         <h2>Оберіть страви, які б ви вибрали на вечерю</h2>

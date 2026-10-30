@@ -15,7 +15,7 @@ export default () => {
       nextRoute={"/age"}
     >
       <RadioBlock>
-        <h2>Стать</h2>
+        <h2>Яка ваша стать?</h2>
         <div className="radiGroupt">
           <div>
             <label htmlFor="male">Чоловіча</label>
