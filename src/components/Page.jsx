@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { RadioBlock } from "@/components/StyledForm";
 import { Form } from "@/components/Form";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -18,8 +17,8 @@ export const Page = ({
   const dispatch = useDispatch();
   const info = useInfo();
 
-  const onSubmit = (event) => {
-    const data = formDataLoader(event);
+  const onSubmit = async (event) => {
+    const data = await formDataLoader(event);
     dispatch(setInfo({ [currentParam]: data[currentParam] }));
   };
 

@@ -4,9 +4,7 @@ import { createInfo } from "@/service/createHabits";
 import { infoParams } from "@/service/dataArrs";
 
 export default () => {
-  const formDataLoader = (event) => {
-    console.log("qwe");
-
+  const formDataLoader = async (event) => {
     const data = { info_source: createInfo(event.target, infoParams) };
     return data;
   };

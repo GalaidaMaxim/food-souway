@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { useInfo } from "@/redux/selectors";
 import { setInfo } from "@/redux/slices";
 import { useEffect } from "react";
+import { createFood } from "@/service/crewateFood";
+import { Loader } from "@/components/Loader";
 
 import styled from "@emotion/styled";
 
@@ -29,11 +31,7 @@ const ThisForm = styled(StyledForm)`
 
 export default function Home() {
   const router = useRouter();
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-    router.push("/policy");
-  };
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -44,7 +42,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <ThisForm onSubmit={onSubmit}>
+        {/* <Loader /> */}
+        <ThisForm>
           <div>
             <h1>
               Дякуємо за участь в опитуванні! Ваші відповіді є важливим внеском
