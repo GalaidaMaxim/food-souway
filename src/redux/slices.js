@@ -3,7 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 export const infoSlice = createSlice({
   name: "info",
   initialState: {
-    value: {},
+    value: {
+      email: "23",
+      gender: "123",
+    },
   },
   reducers: {
     setInfo(state, { payload }) {

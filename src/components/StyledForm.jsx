@@ -14,6 +14,10 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* align-items: center; */
+  & h2 {
+    font-size: 32px;
+  }
 `;
 export const Input = styled.div`
   margin-top: 30px;
@@ -23,7 +27,18 @@ export const NamedInput = styled(Input)`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  & label {
+    font-size: 32px;
+    font-weight: 700;
+  }
   & input {
+    margin-top: 80px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid brown;
+    padding: 20px;
+    font-size: 24px;
     height: 30px;
   }
 `;
@@ -31,9 +46,13 @@ export const NamedInput = styled(Input)`
 export const RadioBlock = styled(Input)`
   & .radiGroupt {
     display: flex;
+    flex-direction: column;
     justify-content: left;
-    margin-top: 20px;
+    margin-top: 100px;
     gap: 20px;
+    & label {
+      font-size: 24px;
+    }
     & input {
       margin-left: 10px;
     }
