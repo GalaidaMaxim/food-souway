@@ -42,7 +42,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        {/* <Loader /> */}
+        <Loader />
         <ThisForm>
           <div>
             <h1>

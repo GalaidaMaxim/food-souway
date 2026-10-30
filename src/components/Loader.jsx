@@ -1,4 +1,10 @@
-import { Grid } from "react-loader-spinner";
+import dynamic from "next/dynamic";
+
+// Імпортуємо компонент динамічно ТІЛЬКИ для клієнта
+const Blocks = dynamic(
+  () => import("react-loader-spinner").then((mod) => mod.Blocks),
+  { ssr: false }, // Це повністю вирішує проблему із сервером
+);
 import styled from "@emotion/styled";
 
 const Cover = styled.div`
@@ -15,5 +21,9 @@ const Cover = styled.div`
 `;
 
 export const Loader = () => {
-  return <Cover>123</Cover>;
+  return (
+    <Cover>
+      <Blocks />
+    </Cover>
+  );
 };
