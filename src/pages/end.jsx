@@ -27,7 +27,7 @@ const ThisForm = styled(StyledForm)`
   }
 `;
 
-export default function Home({ clientID }) {
+export default function Home() {
   const router = useRouter();
 
   const onSubmit = (event) => {

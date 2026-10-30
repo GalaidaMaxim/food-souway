@@ -5,7 +5,9 @@ import { infoParams } from "@/service/dataArrs";
 
 export default () => {
   const formDataLoader = (event) => {
-    const data = { choise_paramiters: createInfo(event.target, infoParams) };
+    console.log("qwe");
+
+    const data = { info_source: createInfo(event.target, infoParams) };
     return data;
   };
 

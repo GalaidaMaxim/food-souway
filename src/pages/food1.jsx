@@ -33,7 +33,7 @@ export default () => {
   return (
     <Page
       formDataLoader={formDataLoader}
-      prevParam={"email"}
+      prevParam={"eating_habits"}
       currentParam={"food1"} //food1
       nextRoute={"/food2"}
     >
