@@ -22,7 +22,7 @@ const ThisForm = styled(StyledForm)`
   & h1 {
     font-size: 25px;
     @media screen and (min-width: 768px) {
-      font-size: 50px;
+      font-size: 45px;
     }
   }
   & p {
@@ -61,7 +61,7 @@ export default function Home({ clientID }) {
         <ThisForm onSubmit={onSubmit}>
           <div>
             <h1>
-              Дослідження моделей харчової поведінки в контексті здорового
+              Дослідження харчової поведінки споживачів в контексті здорового
               способу життя
             </h1>
             <p>
