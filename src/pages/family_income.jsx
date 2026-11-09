@@ -20,19 +20,19 @@ export default () => {
         <h2>Який середньомісячний дохід вашої родини?</h2>
         <div className="radiGroupt">
           <div>
-            <label htmlFor="male">до 20000</label>
+            <label htmlFor="male">до 20000 грн</label>
             <input type="radio" name="family_income" value={1} />
           </div>
           <div>
-            <label htmlFor="male">до 30000</label>
+            <label htmlFor="male">до 30000 грн</label>
             <input type="radio" name="family_income" value={2} />
           </div>
           <div>
-            <label htmlFor="male">до 40000</label>
+            <label htmlFor="male">до 40000 грн</label>
             <input type="radio" name="family_income" value={3} />
           </div>
           <div>
-            <label htmlFor="male">50000 і вище</label>
+            <label htmlFor="male">50000 грн і вище</label>
             <input type="radio" name="family_income" value={4} />
           </div>
         </div>

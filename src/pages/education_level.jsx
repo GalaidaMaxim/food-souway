@@ -20,7 +20,7 @@ export default () => {
         <h2>Який ваш найвищий здобутий рівень освіти?</h2>
         <div className="radiGroupt">
           <div>
-            <label htmlFor="male">Середня</label>
+            <label htmlFor="male">Середня освіта</label>
             <input type="radio" name="education_level" value={1} />
           </div>
           <div>
@@ -28,7 +28,7 @@ export default () => {
             <input type="radio" name="education_level" value={2} />
           </div>
           <div>
-            <label htmlFor="male">Вища</label>
+            <label htmlFor="male">Вища освіта</label>
             <input type="radio" name="education_level" value={3} />
           </div>
           <div>

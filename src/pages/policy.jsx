@@ -84,7 +84,7 @@ export default function Home({ clientID }) {
             </p>
           </div>
           <div className="privat">
-            <label>Приянйти</label>
+            <label>Прийняти</label>
             <input
               onChange={(event) => setPolicy(event.target.checked)}
               value={policy}

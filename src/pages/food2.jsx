@@ -2,15 +2,7 @@ import { CheckboxBlock } from "@/components/StyledForm";
 import { Page } from "@/components/Page";
 import styled from "@emotion/styled";
 import { FoodCard } from "@/components/FoodFard";
-
-const StyledFoodList = styled.div`
-  margin-top: 30px;
-  gap: 30px;
-  display: grid;
-  @media screen and( min-width: 768px ) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-`;
+import { StyledFoodList } from "@/components/StyledFoodList";
 
 const StyledLable = styled.div`
   display: flex;
@@ -58,7 +50,7 @@ export default () => {
       nextRoute={"/food3"}
     >
       <CheckboxBlock>
-        <h2>Оберіть страви, які б ви вибрали на обід</h2>
+        <h2>Які страви ви обрали б на обід?</h2>
         <StyledFoodList>
           <FoodCard
             name={values[0]}
@@ -83,7 +75,7 @@ export default () => {
           <FoodCard
             name={values[4]}
             image={"./images/chickenSoup.jpg"}
-            lable={"Запечений хек з картоплею та овочами"}
+            lable={"Курячий суп із вермішеллю"}
           />
           <FoodCard
             name={values[5]}

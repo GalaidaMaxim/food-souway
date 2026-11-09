@@ -35,6 +35,10 @@ const ThisForm = styled(StyledForm)`
 
     text-align: justify;
   }
+  & span {
+    /* margin-left: 20px; */
+    font-weight: 800;
+  }
 `;
 
 export default function Home({ clientID }) {
@@ -60,10 +64,11 @@ export default function Home({ clientID }) {
               Дослідження моделей харчової поведінки в контексті здорового
               способу життя
             </h1>
-
             <p>
-              Привіт, друже! Допоможи нам сформувати тренди здорового харчування
-              в українському сегменті споживачів
+              Привіт, друже! Допоможи нам дослідити тренди здорового харчування
+              в українському сегменті споживачів і заповни опитувальник на{" "}
+              <br />
+              <span>food-souway</span>.
             </p>
           </div>
           <BaseButton>Почати</BaseButton>
