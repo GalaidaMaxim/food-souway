@@ -17,7 +17,10 @@ export default () => {
       nextRoute={"/info_source"}
     >
       <CheckboxBlock>
-        <h2>Що найчастіше впливає на ваш вибір продуктів?</h2>
+        <h2>
+          Що найчастіше впливає на ваш вибір продуктів? (можна обрати кілька
+          варіантів)
+        </h2>
         <div className="items">
           <div>
             <label htmlFor="">Cклад продукту</label>
